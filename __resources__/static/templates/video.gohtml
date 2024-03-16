@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/css/material-components-web.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <style>
+        body {
+            background: #000;
+        }
+
+        .message {
+            color: grey;
+        }
+
+        .no-padding {
+            padding-top: 0px;
+        }
+
+        .logo {
+            width: 48px;
+        }
+
+        @media screen and (min-width: 768px) {
+            footer {
+                position: initial;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .video-container {
+                padding: 0px;
+                width: 100%;
+            }
+
+            .mt-30 {
+                margin-top: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                    <img src="/static/img/logo.png" class="logo">
+                    <span class="title">{{.Name}}</span>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<div class="mdc-layout-grid video-container mt-30">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <video src="{{.URL}}" controls width="100%">
+                <p>Your browser doesn't support HTML5 video</p>
+            </video>
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid no-padding ">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <p class="message" style="font-style: normal;">{{.Message}}</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <p>Copyright © 2019 Airfree. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="/static/js/material-components-web.min.js"></script>
+<script>mdc.autoInit()</script>
+</body>
+
+</html>

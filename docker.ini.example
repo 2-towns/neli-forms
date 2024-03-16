@@ -1,0 +1,3 @@
+videos_url = "http://neli-forms.herokuapp.com/neli"
+api_url = "https://neli-webservices.herokuapp.com"
+port = 8080

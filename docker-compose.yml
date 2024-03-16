@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    build: .
+    restart: always
+    command: neli-forms --config ./docker.ini
+    volumes:
+      - .:/go/src/gitlab.com/arnaud-web/neli-forms
+    ports:
+      - "5000:5000"

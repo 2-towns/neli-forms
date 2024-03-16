@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/css/material-components-web.min.css" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <style>
+        .logo {
+            width : 48px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                        <img src="/static/img/logo.png" class="logo">
+                        <span class="title">Reset your password</span>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div class="mdc-layout-grid mt-30 ">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+                <p>
+                    <span class="description">Enter a new password</span>
+                </p>
+                <form id="form" >
+
+                    <div class="text-field-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="password" class="mdc-text-field__input" id="password" required>
+                            <label for="password" class="mdc-text-field__label">New password</label>
+                        </div>
+                    </div>
+
+                    <div class="text-field-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="password" class="mdc-text-field__input" id="confirmation" required>
+                            <label for="password" class="mdc-text-field__label">Confirm the new password</label>
+                        </div>
+                    </div>
+
+                    <div class="text-field-container mt-30">
+                        <button class="mdc-button mdc-button--raised">
+                            Validate
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    <p>Copyright ©  2019 Airfree. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/material-components-web.min.js"></script>
+    <script>mdc.autoInit()</script>
+    <script>
+        var password = document.getElementById("password")
+        var confirmation = document.getElementById("confirmation")
+
+        function validate_password() {
+            if (password.value != confirmation.value) {
+                confirmation.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirmation.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validate_password;
+        confirmation.onkeyup = validate_password;
+
+        var form = document.getElementById("form")
+
+        form.onsubmit = function (event) {
+            event.preventDefault();
+
+            var data = {
+                "newPassword": password.value,
+                "setPasswordToken": "{{.Code}}"
+            }
+     
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                   window.location.href = "/confirmation";
+                }
+            });
+
+            xhr.open("POST", "{{.URL}}/auth/set-password");
+            xhr.setRequestHeader("Content-type", "application/json");
+             xhr.send(JSON.stringify(data));
+        }
+    </script>
+</body>
+
+</html>
